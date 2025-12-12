@@ -166,7 +166,7 @@ void setup_routine()
     scope.connectChannel(V3_low_value, "V3_low");
     scope.connectChannel(I2_low_value, "I2_low");
     scope.connectChannel(V2_low_value, "V2_low");
-    scope.connectChannel(duty_cycle, "duty_cycle");
+    scope.connectChannel(trigger_level, "trigger_level");
     scope.connectChannel(V_high, "V_high");
     scope.set_trigger(&a_trigger);
     scope.set_delay(0.2F);
@@ -343,8 +343,8 @@ void loop_critical_task()
         shield.power.setDutyCycle(LEG3,duty_cycle);
         shield.power.setPhaseShift(LEG3,phase_3);
 
-        trigger_level +=.001;
-        if (trigger_level>1.0) trigger_level=0;
+        trigger_level +=.0002;
+        if (trigger_level>0.7) trigger_level=0.5;
 
         shield.power.setTriggerValue(LEG1,trigger_level);
         shield.power.setTriggerValue(LEG2,trigger_level);
